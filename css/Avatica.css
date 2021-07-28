@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Avatica';
+    src: url('../fonts/aviatica-webfont.woff') format('woff'),
+         url('../fonts/aviatica-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}

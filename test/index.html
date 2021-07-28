@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Js Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    body {
+        font-family: "Source Sans Pro", sans-serif !important;
+        background-color: #f0f0f0
+    }
+
+    .header {
+      min-height: 70px;
+      background: white;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.08);
+      border-bottom: solid 1px rgba(0, 0, 0, 0.02);
+      z-index: 99;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      height: 80px;
+    }
+
+    #inner-board {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        margin-left: auto; 
+        margin-right: auto;
+        padding: 10px;
+        -webkit-transition: background 1s, opacity 1s;
+        transition: background 1s, opacity 1s;
+        
+    }
+
+    #main-board {
+      width: 100%;
+      height: 380px;
+    }
+
+    #game-board {
+      display: none;
+      font-size: 3em;
+      width:100%;
+      height: 100%;
+    }
+
+
+    #problem-field {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .num-field {
+        min-width: 40px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        margin: 10px;
+    }
+
+    #result-field {
+      display: none;
+      font-size: 3em;
+    }
+
+    .btn-select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      margin: 5px !important;
+      background-color: #fff;
+      width: 60px !important;
+      height: 60px !important;
+      border-radius: 8px !important;
+      font-family: 'Open Sans', Arial;
+      font-size: 40px;
+      font-weight: 300;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.09) !important;
+      border: solid 1px rgba(0, 0, 0, 0.1);
+
+    }
+    .btn-select.active {
+      background: #0d4199;
+      color: white;
+      
+    }
+
+    #next-btn {
+        width: 250px;
+        background: #2aba66;
+        color: white;
+        font-weight: 900;
+        border-radius: 10px;
+    }
+
+    #next-btn:hover {
+        opacity: 0.9;
+    }
+
+    .progress {
+      width: 100px;
+      height: 100px;
+      background: none;
+      position: relative;
+    }
+
+    .progress::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 7px solid #bedbda52;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .progress>span {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+    }
+
+    .progress .progress-left {
+      left: 0;
+    }
+
+    .progress .progress-bar {
+      width: 100%;
+      height: 100%;
+      background: none;
+      border-width: 6px;
+      border-style: solid;
+      position: absolute;
+      top: 0;
+    }
+
+    .progress .progress-left .progress-bar {
+      left: 100%;
+      border-top-right-radius: 80px;
+      border-bottom-right-radius: 80px;
+      border-left: 0;
+      -webkit-transform-origin: center left;
+      transform-origin: center left;
+    }
+
+    .progress .progress-right {
+      right: 0;
+    }
+
+    .progress .progress-right .progress-bar {
+      left: -100%;
+      border-top-left-radius: 80px;
+      border-bottom-left-radius: 80px;
+      border-right: 0;
+      -webkit-transform-origin: center right;
+      transform-origin: center right;
+    }
+
+    .progress .progress-value {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+    </div>
+    <div class="btn-group-vertical opera-field d-none" data-toggle="buttons"  id="opera-tmp">
+        <label class="btn btn-select form-check-label" for='radio1'>
+            <input class="form-check-input fade" type="radio" name='radio1' autocomplete="off">+
+        </label>
+        <label class="btn btn-select form-check-label" for=radio2>
+            <input class="form-check-input fade" type="radio"  name='radio2' autocomplete="off">&minus;
+        </label>
+        <label class="btn btn-select form-check-label" for='radio3'>
+            <input class="form-check-input fade" type="radio"  name='radio3' autocomplete="off">&times;
+        </label>
+        <label class="btn btn-select form-check-label" for='radio4'>
+            <input class="form-check-input fade" type="radio"  name='radio4' autocomplete="off">&divide;
+        </label>
+    </div>
+  
+    <div class="row m-1 mt-5">
+        <div class="col-lg-11" id="inner-board">
+            <h1 id='result-field' class='mt-5 text-center'>
+            </h1>
+            <div id="main-board" class="h-100">
+                <div id="game-board" class="h-100">
+                    <div class="progress" id="time-circle" style="float: right;">
+                      <span class="progress-left">
+                        <span class="progress-bar border-info"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar border-info"></span>
+                      </span>
+                      <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold"><span id="remain-time"></span><sup class="small">s</sup></div>
+                      </div>
+                    </div>
+                    <div id="problem-field"></div>
+                    <div id="action-field" class="d-flex justify-content-around flex-wrap align-items-center mt-5">
+                        <button type="button" id="next-btn" class="btn btn-lg d-none">Continue</button>
+                        <!-- <div id="finish-btn" class="btn btn-lg btn-seco ndary">Finish</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+   
+    const redirectUrl = 'https://braining.app/process.php'
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const timeToPlay = Number(urlParams.get('timeToPlay'));
+    const numberOfChars = urlParams.get('chars')
+    const difficulty = urlParams.get('difficulty');
+    const growthFactor = urlParams.get('growthFactor');
+    let curPro = null;
+
+    let timePlayed = 0;
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    let allAnswers = 0;
+    let medianAnswerTime = 0;
+
+    let startTime = null;
+    let endTime = null;
+    let finished = false;
+
+    let timeHandler = null;
+    let intervalHandler = null;
+
+    let operaTmp = null;
+
+    let allOperas = ['+', '-', '*', '/'];
+    let curDiffState = 0;
+    
+    $(document).on('click', '#start-btn', playGame);
+    $(document).on('click', '#next-btn', nextProblem);
+    $(document).on('click', '.opera-field > label', changeContinueButton);
+
+
+    init();
+    playGame();
+
+    $(document).on('click', '.radioBtn div', function(){
+        var sel = $(this).data('title');
+        var tog = $(this).data('toggle');
+        $('#'+tog).prop('value', sel);
+        
+        $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+    })
+
+    function changeContinueButton() {
+        let nextBtn = document.getElementById('next-btn');
+        if(nextBtn.classList.contains('d-none'));
+            nextBtn.classList.remove('d-none');
+    }
+
+    function showGameBoard() {
+        $('#game-board').show();
+        $('#finish-board').hide();
+    }
+    function showFinishGame() {
+        $('#game-board').hide();
+        $('#finish-board').show();
+    }
+
+    function init() {
+        operaTmp = document.querySelector('#opera-tmp').cloneNode(true);
+        operaTmp.removeAttribute('id');
+
+        if(difficulty == 'easy' || difficulty == 'modest' || difficulty == 'growFactor') {
+            removeLastChildren(operaTmp, 2);
+        } else if(difficulty == 'hard') {
+            removeLastChildren(operaTmp, 1);
+        }
+
+        if(difficulty === 'easy') {
+            curDiffState = 0;
+        } else if(difficulty === 'modest') {
+            curDiffState = 1;
+        } else if(difficulty === 'hard') {
+            curDiffState = 2;
+        } else {
+            curDiffState = 3;
+        }
+    }
+
+    function changeCurDiffState() {
+        curDiffState ++;
+        if( curDiffState > 3 ) {
+            curDiffState = 3;
+        }
+        operaTmp = document.querySelector('#opera-tmp').cloneNode(true);
+        operaTmp.removeAttribute('id');
+        if(curDiffState == 1) {
+            removeLastChildren(operaTmp, 2);
+        } else if(curDiffState == 2) {
+            removeLastChildren(operaTmp, 1);
+        }
+    }
+
+    function setTimeToCircle() {
+
+        let timeCircle = $("#time-circle")
+        let nowTime = Date.now();
+
+        let remainTime = timeToPlay - (nowTime - startTime) / 1000;
+
+
+        var left = $(timeCircle).find('.progress-left .progress-bar');
+        var right = $(timeCircle).find('.progress-right .progress-bar');
+
+        if (remainTime >= 0) {
+            if (remainTime > timeToPlay/2) {
+            right.css('transform', 'rotate(' + (1-remainTime/timeToPlay)*360 + 'deg)')
+            } else {
+                right.css('transform', 'rotate(180deg)')
+                left.css('transform', 'rotate(' + (0.5-remainTime/timeToPlay)*360 + 'deg)')
+            }
+        } else {
+            right.css('transform', 'rotate(180deg)')
+            left.css('transform', 'rotate(180deg)')
+        }
+
+        let remainTxt = $('#remain-time').text();
+        let tmp = remainTime>>0;
+        if( remainTxt != tmp)
+            $('#remain-time').text(tmp);
+
+    }
+
+    function resetTimeToCircle() {
+
+        let timeCircle = $("#time-circle")
+
+        var left = $(timeCircle).find('.progress-left .progress-bar');
+        var right = $(timeCircle).find('.progress-right .progress-bar');
+
+      
+        right.css('transform', 'rotate(0deg)')
+        left.css('transform', 'rotate(0deg)');
+        $('#remain-time').text(0);
+
+    }
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        let result =  Math.floor(Math.random() * (max - min + 1)) + min;
+
+        return result;
+    }
+
+    function getFactors(num) {
+        let factors = [];
+        factors.push(1);
+        factors.push(num);
+        for (let i = 2; i < Math.sqrt(num); i++) {
+            if(num%i == 0) {
+                factors.push(i);
+            }
+        }
+        return factors;
+    }
+
+    function removeLastChildren(element, removeNum) {
+        for (var i = 0; i < removeNum; i++) {
+            if(element.lastElementChild) {
+                element.removeChild(element.lastElementChild);
+            } else {
+                break;
+            }
+        }
+    }
+
+    function checkInArray(element, array) {
+        for (var i = 0; i < array.length; i++) {
+            if(element == array[i]) {
+                return true
+            }
+        }
+        return false;
+    }
+
+    function makeProblem(difficulty = 'easy', numberOfChars = 3) {
+
+        let diffNum;
+        let numRange;
+
+        if(curDiffState === 0) {
+            diffNum = 2;
+            numRange = 10;
+        } else if(curDiffState === 1) {
+            diffNum = 2;
+            numRange = 100;
+        } else if(curDiffState === 2) {
+            diffNum = 3;
+            numRange = 100;
+        } else {
+            diffNum = 4;
+            numRange = 100;
+        }
+
+        let nums = [];
+        let operas = [];
+        let beforeOpera = 0;
+
+        let numTmp = 0;
+        let numTmpForDiv = 0;
+
+        for (let i = 0; i < numberOfChars; i++) {
+            
+            if(beforeOpera == 3) {
+                let factors = getFactors(numTmpForDiv);
+                numTmpForDiv = numTmp;
+                numTmp = factors[getRandomInt(0, factors.length-1)];
+                numTmpForDiv /= numTmp;
+            } else {
+                let tmpRnd = 1;
+                for (let j = 0; j < 10; j++) {
+                    tmpRnd = getRandomInt(1, numRange - 1);
+                    if( !checkInArray(tmpRnd, nums) ) break;
+                }
+                numTmp = tmpRnd;
+                numTmpForDiv = numTmp;
+            }
+
+            beforeOpera = getRandomInt(0, diffNum-1);
+            operas.push(beforeOpera);
+            nums.push(numTmp);
+        }
+        
+        let result = solveProblem(nums, operas);
+        let problem = { nums, operas, result};
+
+
+        return problem;
+    }
+
+    function solveProblem(nums, operas) {
+        let tmp1 = 0;
+        let tmp2 = 0;
+        let tmpOpera = 0; // + operation
+
+        for (let i = 0; i < nums.length; i++) {
+            if(tmpOpera == 0) {
+                tmp1 += tmp2;
+                tmp2 = nums[i];
+            } else if(tmpOpera == 1) {  // - opera
+                tmp1 += tmp2;
+                tmp2 = -nums[i];
+            } else if(tmpOpera == 2) { // * opera
+                tmp2 *= nums[i];
+            } else if(tmpOpera == 3) { // / opera
+                tmp2 /= nums[i];
+            }
+            tmpOpera = operas[i];
+        }
+
+        return tmp1 + tmp2;
+    }
+
+
+    function playGame() {
+        showGameBoard();
+        showProblem();
+
+        startTime = Date.now();
+        if(timeHandler) {
+            clearTimeout(timeHandler);
+        }
+        timeHandler = setTimeout(finishGame, timeToPlay*1000);
+        if(intervalHandler) {
+            clearInterval(intervalHandler);
+        }
+        intervalHandler = setInterval(setTimeToCircle, 50);
+    }
+
+    function nextProblem() {
+
+        let solution = getSolution();
+        let result = solveProblem(curPro.nums, solution);
+        allAnswers ++;
+        if( result === curPro.result ) {
+            correctAnswers ++;
+            $('#result-field').text('Correct!');
+            $('#result-field').css('color', 'green');
+            if(growthFactor != 0 && (correctAnswers % growthFactor == 0)) {
+                changeCurDiffState();
+            }
+        } else {
+            $('#result-field').text('Wrong!');
+            $('#result-field').css('color', 'red');
+        }
+        let nextBtn = document.getElementById('next-btn');
+        if(!nextBtn.classList.contains('d-none'));
+            nextBtn.classList.add('d-none');
+        $('#main-board').hide();
+
+        setTimeout(function(){$('#main-board').show();}, 1000);
+        $('#result-field').fadeIn('slow');
+        $('#result-field').fadeOut('fast');
+
+        showProblem();
+    }
+
+    function showProblem() {
+
+        let proField = document.getElementById('problem-field');
+        while (proField.firstChild) {
+            proField.removeChild(proField.firstChild);
+        }
+        let tmp = null;
+        curPro = makeProblem(difficulty, numberOfChars);
+        for (let i = 0; i < curPro.nums.length - 1; i++) {
+            
+            tmp = document.createElement("div");
+            tmp.classList.add('num-field');
+            tmp.innerHTML = curPro.nums[i];
+            if(tmp)
+                proField.appendChild(tmp);
+
+            tmp = operaTmp.cloneNode(true);
+            tmp.removeAttribute('id');
+            tmp.classList.remove('d-none');
+
+            if(tmp)
+                proField.appendChild(tmp);
+        }
+
+        tmp = document.createElement("div");
+        tmp.classList.add('num-field');
+        tmp.innerHTML = curPro.nums[curPro.nums.length-1];
+
+        if(tmp)
+            proField.appendChild(tmp);
+
+        tmp = document.createElement("div");
+        tmp.classList.add('num-field');
+        tmp.innerHTML = '=';
+
+        if(tmp)
+                proField.appendChild(tmp);
+
+        tmp = document.createElement("div");
+        tmp.classList.add('num-field');
+        tmp.innerHTML = curPro.result;
+
+        if(tmp)
+                proField.appendChild(tmp);
+
+
+    }
+
+    function getSolution() {
+        let proField = document.getElementById('problem-field');
+        let solution = [];
+        let fields = proField.querySelectorAll('.opera-field');
+        for (let i = 0; i < fields.length; i++) {
+            let opera = 0;
+            let radios = fields[i].querySelectorAll('label');
+            for (var j = 0; j < radios.length; j++) {
+                console.log(radios[j].classList);
+                if(radios[j].classList.contains('active')) opera = j;
+            }
+            solution.push(opera);
+        }
+        return solution;
+    }
+
+    function generateUrl(url, params) {
+        var i = 0, key;
+        for (key in params) {
+            if (i === 0) {
+                url += "?";
+            } else {
+                url += "&";
+            }
+            url += key;
+            url += '=';
+            url += params[key];
+            i++;
+        }
+        return url;
+    }
+
+    function finishGame() {
+        let endTime = Date.now();
+        let spanTime = endTime - startTime;
+        timePlayed = (spanTime /1000);
+        if(timePlayed > timeToPlay) timePlayed = timeToPlay;
+        medianAnswerTime = allAnswers != 0 ? (spanTime/allAnswers/1000) : 0;
+        wrongAnswers = allAnswers - correctAnswers;
+        window.location = generateUrl(redirectUrl ,{
+            correctAnswers,
+            wrongAnswers,
+            allAnswers,
+            timePlayed,
+            medianAnswerTime
+        });  
+    }
+});
+</script>
+</body>
+</html>

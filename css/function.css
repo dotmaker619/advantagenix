@@ -1,0 +1,120 @@
+body {
+    color:#fff;
+}
+.enhanced-hero.hero-main-b2938a48-2d86-401a-916c-24377fa097bc .text-wrapper .text-render {
+    width:100% !important;
+}
+.enhanced-hero.-over-image-true .text-wrapper .text-render, .enhanced-hero.-over-image-false .text-wrapper .text-render{
+    text-decoration: none;
+    text-align: center !important;
+}
+.enhanced-hero .text-xxl .headline, .multimedia-hero .text-xxl .headline, .universal-header-wrapper .text-xxl .headline{
+    font-family: "San Francisco";
+    font-weight: 500;
+    font-size: 3.75rem;
+    line-height: 3.75rem;
+}
+.header-top {
+    margin-top:30px;
+    margin-bottom:30px;
+    line-height:1.75em;
+}
+@media (max-width: 767px) {
+    .hero-container.photo-render {
+        background-image: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.83)),url("../images/function/carrie-yang.jpg"); opacity: 0.5;
+        background-size: cover;
+        background-position: bottom;
+        width: 100%;
+        height: calc(100vh - 90px);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        -webkit-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+        pointer-events: none;
+    }
+}@media (min-width: 768px) and (max-width: 1180px) {
+    .hero-container.photo-render {
+        background-image: linear-gradient( rgba(0, 0, 0, 0.81), rgba(0, 0, 0, 0.8)),url("../images/function/carrie-yang.jpg");opacity: 0.5;
+        background-size: cover;
+        background-position: bottom;
+        width: 100%;
+        height: calc(100vh - 90px);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        -webkit-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+        pointer-events: none;
+    }
+}@media (min-width: 1181px) {
+    .hero-container.photo-render {
+        background-image: linear-gradient( rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.81)),url("../images/function/carrie-yang.jpg");opacity: 0.5;
+        background-size: cover;
+        background-position: bottom;
+        width: 100%;
+        height: calc(100vh - 90px);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        -webkit-transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
+        pointer-events: none;
+        linear-gradient: rgba(0, 0, 0, 0.91), rgba(0, 0, 0, 0.94);
+    }
+
+}
+.wrapper {
+    max-width:100%;
+}
+#skipToMain > div.hero-with-partnership-mark.section.-bg-dark-blue-gradient.text-left.vertical-centered.fp-auto-height-responsive > div > div.text-wrapper > div > div > div {
+    text-align: center;
+}
+.hero-with-partnership-mark .text-wrapper {
+    width:100%;
+    padding:0px;
+}
+.nav_locations_2 {
+    margin-top: -30px !important;
+    margin-left: 60px !important;
+}
+.contents-item-image {
+    width:100%;
+    padding:0px;
+}
+.content-grid {
+    width: 95%;
+    margin-left: 50px;
+}
+.full-text-section .content-grid {
+    padding-left:unset;
+    padding-right:unset;
+}
+.full-text-section .text-longform, .full-text-section p {
+    line-height: 2.2rem;
+}
+.end-of-contents {
+    line-height: 2em;
+}
+.footer .footer-header {
+    font-size: 2.0em;
+    margin: 1em 0;
+    line-height: 2em;
+}
+@media (max-width: 1100px)  {
+    .content-grid {
+        width: 95%;
+        margin-left: 30px;
+    }
+}
+body > div:nth-child(4) > h1 {
+    line-height: 3em !important;
+}
+.footer .footer-covid19 {
+    font-size: 2.0em;
+    margin: 2em 0;
+    line-height: 2em;
+}
+.hero-with-partnership-mark .text-wrapper {
+    height: calc(100vh + 20px);
+}

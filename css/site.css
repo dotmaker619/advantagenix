@@ -1,0 +1,222 @@
+
+.container-fluid{
+    padding: 0px;
+}
+
+.scrollToTop{
+    width:60px; 
+    height:60px;
+    position:fixed;
+    background: whitesmoke;
+    bottom:30px;
+    right:30px;
+    display:none;
+    border-radius: 30px;
+    background-image: url('../images/icons/arrow-circle-up.svg');
+    background-size: 60px 60px;
+}
+.navigation-r3.-theme-dark{
+    background-color:black;
+}
+a.logo{
+    color:white;
+    font-size: 2.5em;
+}
+a:hover{
+    text-decoration: none;
+}
+.intro-image{
+    background-image: url(../images/000.png);
+    background-position: right top;
+    background-repeat: no-repeat;   
+}
+.intro-letters, .contents{
+    color: #fff;   
+}
+@media screen and (min-width:48em){
+     .text-render{
+         margin-left: 50px;
+     }
+}
+
+.intro-title-1{
+    font-size:2.5em;
+    line-height: 1.3em;
+    z-index: -1;
+}
+.intro-title-2{
+    font-size:2.3em;
+    line-height: 1.2em;
+    z-index: -1;
+}
+@media screen and (min-width: 48em){
+    .intro-social{
+        width: 50%; 
+        text-align:center;
+    }
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+
+@media screen and (max-width: 48em){
+    .intro-social{
+        width: 100%; 
+        text-align:center;
+    }
+}
+
+.intro-social a, .footer-social a{
+    color:#fff;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: 1.5em;
+}
+.successful{
+    color: #fff;
+    text-align: center;
+}
+
+.outer{
+    margin-bottom: 0px;
+}
+
+@media screen and (min-width: 48em){
+    .contents .contents-item:nth-child(odd) .contents-item-body{
+        float: right;
+        padding: 50px;
+    }
+    .contents .contents-item:nth-child(odd) .contents-item-image{
+        float: right;
+        background-repeat: no-repeat;
+        background-position: 100% 0%;
+        background-size: cover !important;
+    }
+
+    .contents .contents-item .contents-item-body .contents-item-title{
+        font-size: 2.6em;
+        line-height: 1.3em;
+    }
+    .contents .contents-item .contents-item-body .contents-item-summary{
+        font-size: 1.4em;
+        font-weight: lighter;
+    }
+    .contents .contents-item:nth-child(even) .contents-item-body{
+        float: left;
+        padding: 50px;
+    }
+    .contents .contents-item:nth-child(even) .contents-item-image{
+        float: left;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+    .vertical-center {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+}
+@media screen and (max-width: 48em){
+    .contents .contents-item .contents-item-body .contents-item-title{
+        font-size: 1.5em;
+        font-weight: bold;
+        line-height: 1.3em;
+    }
+}
+
+.footer{
+    color: white;
+}
+.footer-body{    
+    background-image: url(../images/999.jpg);
+    background-position: center center;
+    height: 563px;
+}
+@media screen and (min-width:48em){
+    .end-of-contents{
+        color: white;
+        margin: 6em 0 5em 0;
+    }
+    .footer{
+        padding: 2.2em 4em 3em 4em;
+        background-size: auto 100%;
+    }
+    .footer .footer-header{
+        margin: 1.5em 0 3.5em 0 !important;
+    }
+    .footer .footer-covid19{
+        font-size: 1.5em;
+        margin: 1.5em 0;
+    }
+    .footer .footer-logo{
+        font-size: 1.4em;
+        margin: 1em 0;
+    }
+}
+
+.footer-email-input{
+    width: 64%;
+    height: 2em;
+    padding: 4px 10px;
+    color: white;
+    border: 1px solid white;
+    background-color: transparent;
+    font-size: 1.3em;
+}
+.footer-email-input:focus{
+    outline: 0;;
+}
+.footer-email-submit{
+    color: white;
+    background-color: #17a2b8;
+    cursor: pointer;
+    border: none;
+    width: 34%;
+    height: 2.1em;
+    font-size: 1.3em;
+    
+}
+
+.footer-nav li a{
+    color: white;
+    padding: 0 1em;
+}
+.footer-nav .main{
+    font-size: 1rem;
+    line-height: 2em;
+}
+.footer-nav .sub{
+    font-size: 0.8em;
+    line-height: 1.5em;
+}
+.footer-copyright{
+    font-size: 1rem;
+}
+.footer-social{
+    width: 100%;
+}
+.contents .image-right{
+    float:right;
+    margin-left: 1em;
+}
+
+@media screen and (min-width : 48em){
+    .contact-container{
+        margin-left: 30%;
+        width: 40%;
+        color: white;
+    }
+}
+.contact-container .contact-button{
+    width: 44%;
+    color: white;
+    font-size: 1.5em;
+    line-height: 2em;
+    margin: 20px 0;
+}
+
